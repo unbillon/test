@@ -1,303 +1,490 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redes Sociales y Rendimiento Académico</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      background: #f4f7fa;
-      color: #333;
-    }
-    header {
-      background: linear-gradient(135deg, #006699, #004466);
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
-    }
-    nav {
-      background: #004466;
-      padding: 12px;
-      text-align: center;
-    }
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    section {
-      padding: 30px;
-      max-width: 950px;
-      margin: 20px auto;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #004466;
-      margin-top: 0;
-    }
-    ul {
-      margin-left: 20px;
-    }
-    blockquote {
-      background: #e6f2f8;
-      border-left: 5px solid #004466;
-      padding: 15px;
-      font-style: italic;
-      margin: 20px 0;
-    }
-    footer {
-      background: #002233;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-
-    /* Estilos del quiz */
-    .quiz-container {
-      margin-top: 20px;
-    }
-    .quiz-question {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .quiz-options button {
-      display: block;
-      margin: 5px 0;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      background: #006699;
-      color: white;
-      cursor: pointer;
-      width: 100%;
-      text-align: left;
-    }
-    .quiz-options button:hover {
-      background: #004466;
-    }
-    .quiz-result {
-      margin-top: 15px;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influencia de las Redes Sociales en Universitarios</title>
+    <!-- Incluye Tailwind CSS para un diseño moderno y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuente Inter de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+            line-height: 1.7;
+        }
+        .page-container {
+            max-width: 900px;
+        }
+        h2, h3 {
+            font-weight: 500;
+        }
+        #memoria-game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .memoria-card {
+            width: 100%;
+            height: 100px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .memoria-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .memoria-card-inner.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .memoria-card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 0.25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: white;
+            border: 1px solid #e0e0e0;
+        }
+        .memoria-card-front {
+            background-color: #f1f5f9;
+            transform: rotateY(180deg);
+            color: #1e293b;
+            font-size: 2.5rem;
+        }
+        .memoria-card-back {
+            background-color: #e2e8f0;
+        }
+        .memoria-card:hover .memoria-card-inner {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>Redes Sociales y Rendimiento Académico</h1>
-    <p>Un análisis sobre cómo el uso digital impacta en la vida de los estudiantes</p>
-  </header>
+<body class="antialiased">
 
-  <nav>
-    <a href="#resumen">Resumen</a>
-    <a href="#importancia">Importancia</a>
-    <a href="#beneficios">Beneficios</a>
-    <a href="#riesgos">Riesgos</a>
-    <a href="#resultados">Resultados</a>
-    <a href="#quiz">Juego</a>
-    <a href="#conclusiones">Conclusiones</a>
-  </nav>
+    <!-- Encabezado y barra de navegación -->
+    <header class="bg-white p-6 md:p-12 text-center border-b border-gray-200">
+        <h1 class="text-3xl md:text-4xl font-light mb-2 tracking-wide">
+            Análisis de la Influencia de las Redes Sociales en Universitarios
+        </h1>
+        <p class="text-base md:text-lg text-gray-500">
+            Un estudio sobre la conexión, la academia y el bienestar en la vida estudiantil.
+        </p>
+    </header>
 
-  <section id="resumen">
-    <h2>Resumen</h2>
-    <p>
-      El estudio analizó la influencia de las redes sociales en estudiantes de educación básica media. 
-      Lejos de ser únicamente un distractor, estas plataformas pueden convertirse en un recurso educativo 
-      cuando se emplean con moderación y responsabilidad.
-    </p>
-  </section>
+    <nav class="bg-white sticky top-0 z-50 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center h-12 md:h-16">
+                <div class="flex space-x-4 md:space-x-6">
+                    <a href="#resumen" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Resumen</a>
+                    <a href="#beneficios" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Beneficios</a>
+                    <a href="#riesgos" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Riesgos</a>
+                    <a href="#resultados" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Resultados</a>
+                    <a href="#quiz" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Quiz</a>
+                    <a href="#memoria" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Memoria</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="page-container mx-auto p-4 md:p-8">
 
-  <section id="importancia">
-    <h2>Importancia del Tema</h2>
-    <p>
-      En la actualidad, las redes sociales forman parte esencial de la vida de los jóvenes.
-      Influyen en la comunicación, la identidad y el aprendizaje. El reto no es prohibirlas,
-      sino enseñar a usarlas de manera responsable.
-    </p>
-    <blockquote>
-      “El reto de la educación actual no es prohibir las redes sociales, sino guiar a los estudiantes 
-      en su uso consciente y responsable.”
-    </blockquote>
-  </section>
+        <!-- Sección de Resumen -->
+        <section id="resumen" class="p-6 md:p-8 mb-6">
+            <h2 class="text-2xl md:text-3xl font-light text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">Resumen del Análisis</h2>
+            <p class="text-gray-600 text-base md:text-lg">
+                El presente estudio profundiza en el papel que desempeñan las redes sociales en la vida de los estudiantes universitarios. Más allá de su uso recreativo, estas plataformas son una herramienta omnipresente que moldea la comunicación, la colaboración académica y el bienestar personal. El análisis busca comprender el delicado equilibrio entre las oportunidades y los desafíos que presentan para esta población demográfica.
+            </p>
+        </section>
 
-  <section id="beneficios">
-    <h2>Beneficios del Uso de Redes Sociales</h2>
-    <ul>
-      <li>Facilitan la comunicación entre estudiantes y docentes.</li>
-      <li>Favorecen el aprendizaje colaborativo mediante grupos y foros.</li>
-      <li>Acceso rápido a información y recursos digitales.</li>
-      <li>Desarrollan habilidades digitales.</li>
-    </ul>
-  </section>
+        <!-- Sección de Beneficios -->
+        <section id="beneficios" class="p-6 md:p-8 mb-6">
+            <h2 class="text-2xl md:text-3xl font-light text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">Beneficios en el Ámbito Universitario</h2>
+            <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                <div class="border border-gray-200 p-6 rounded-lg">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">Colaboración y Grupos de Estudio</h3>
+                    <p class="text-gray-600">
+                        Permiten la creación de grupos de estudio virtuales y la comunicación instantánea para coordinar proyectos, compartir notas y resolver dudas académicas.
+                    </p>
+                </div>
+                <div class="border border-gray-200 p-6 rounded-lg">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">Acceso a Recursos e Información</h3>
+                    <p class="text-gray-600">
+                        Facilitan el acceso a artículos, noticias y conferencias académicas de fuentes especializadas, manteniéndolos actualizados en su campo de estudio.
+                    </p>
+                </div>
+                <div class="border border-gray-200 p-6 rounded-lg">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">Desarrollo Profesional y Networking</h3>
+                    <p class="text-gray-600">
+                        Plataformas como LinkedIn permiten a los estudiantes construir una marca personal, conectar con profesionales y buscar oportunidades laborales.
+                    </p>
+                </div>
+            </div>
+            <img src="https://placehold.co/800x400/cccccc/333333?text=Uso+Acad%C3%A9mico+de+Redes" alt="Imagen de un grupo de estudiantes universitarios usando una tablet y un portátil para estudiar" class="mt-6 border border-gray-200">
+        </section>
 
-  <section id="riesgos">
-    <h2>Riesgos del Uso Excesivo</h2>
-    <ul>
-      <li>Pérdida de concentración durante el estudio.</li>
-      <li>Menos tiempo para tareas escolares.</li>
-      <li>Trastornos del sueño.</li>
-      <li>Exposición a ciberbullying o noticias falsas.</li>
-    </ul>
-  </section>
+        <!-- Sección de Riesgos -->
+        <section id="riesgos" class="p-6 md:p-8 mb-6">
+            <h2 class="text-2xl md:text-3xl font-light text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">Riesgos y Desafíos del Uso Excesivo</h2>
+            <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                <div class="border border-gray-200 p-6 rounded-lg">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">Impacto en el Rendimiento Académico</h3>
+                    <p class="text-gray-600">
+                        La constante interrupción de notificaciones puede llevar a la procrastinación y a una menor concentración, afectando directamente la calidad del estudio.
+                    </p>
+                </div>
+                <div class="border border-gray-200 p-6 rounded-lg">
+                    <h3 class="font-semibold text-lg mb-2 text-gray-800">Problemas de Salud Mental</h3>
+                    <p class="text-gray-600">
+                        El uso excesivo se ha asociado con un aumento de la ansiedad, el estrés y el miedo a perderse de algo (FOMO), impactando negativamente en el bienestar psicológico.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-  <section id="resultados">
-    <h2>Resultados del Estudio</h2>
-    <ul>
-      <li>77% de los estudiantes tiene cuentas activas en redes sociales.</li>
-      <li>El 69% cree que no los distraen de sus estudios.</li>
-      <li>El 68% las considera útiles en el ámbito académico.</li>
-      <li>El 74% asegura que no afectan su rendimiento académico.</li>
-    </ul>
-    <canvas id="chart1" height="100"></canvas>
-    <canvas id="chart2" height="100" style="margin-top:20px;"></canvas>
-  </section>
+        <!-- Sección de Resultados con Gráficos -->
+        <section id="resultados" class="p-6 md:p-8 mb-6">
+            <h2 class="text-2xl md:text-3xl font-light text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">Resultados del Análisis</h2>
+            <div class="space-y-4 text-gray-700 mb-6">
+                <p>
+                    Para este análisis, se encuestó a un grupo representativo de estudiantes universitarios. Los datos a continuación ilustran los hallazgos clave de nuestro estudio.
+                </p>
+                <ul class="list-disc list-inside space-y-2 text-gray-600">
+                    <li>El <strong>85%</strong> de los estudiantes usa redes sociales a diario para fines no académicos.</li>
+                    <li>Un <strong>60%</strong> considera que las redes sociales afectan negativamente su concentración durante el estudio.</li>
+                    <li>El <strong>70%</strong> usa grupos de redes sociales para coordinar trabajos y proyectos.</li>
+                    <li>Solo el <strong>45%</strong> utiliza las redes para fines de networking profesional.</li>
+                </ul>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                <div class="border border-gray-200 p-4 rounded-lg">
+                    <canvas id="chart1" height="200"></canvas>
+                </div>
+                <div class="border border-gray-200 p-4 rounded-lg">
+                    <canvas id="chart2" height="200"></canvas>
+                </div>
+            </div>
+        </section>
 
-  <!-- Juego interactivo -->
-  <section id="quiz">
-    <h2>🎮 Juego: ¿Cuánto sabes sobre redes sociales y estudios?</h2>
-    <div class="quiz-container">
-      <div id="quiz-question" class="quiz-question"></div>
-      <div id="quiz-options" class="quiz-options"></div>
-      <div id="quiz-result" class="quiz-result"></div>
-    </div>
-  </section>
+        <!-- Sección del Juego (Quiz) -->
+        <section id="quiz" class="p-6 md:p-8 mb-6">
+            <h2 class="text-2xl md:text-3xl font-light text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">Juego: ¿Qué tanto sabes?</h2>
+            <div class="text-gray-700">
+                <div id="quiz-question" class="text-lg font-medium mb-4 text-gray-700"></div>
+                <div id="quiz-options" class="space-y-2"></div>
+                <div id="quiz-result" class="mt-4 text-lg font-bold"></div>
+            </div>
+        </section>
 
-  <section id="conclusiones">
-    <h2>Conclusiones</h2>
-    <p>
-      El impacto de las redes sociales en el rendimiento académico no depende de la cantidad de tiempo,
-      sino del uso que se les dé. Usadas de forma consciente, pueden ser un aliado para el aprendizaje;
-      usadas en exceso, se convierten en un riesgo. La clave está en el equilibrio.
-    </p>
-  </section>
+        <!-- Nuevo Juego de Memoria -->
+        <section id="memoria" class="p-6 md:p-8 mb-6">
+            <h2 class="text-2xl md:text-3xl font-light text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">Juego de Memoria: Concentración y Distracción</h2>
+            <div class="text-gray-700">
+                <p class="mb-4">
+                    Encuentra las parejas de cartas idénticas para poner a prueba tu concentración.
+                </p>
+                <div id="memoria-game-board"></div>
+                <div class="mt-4 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                    <button id="memoria-restart-btn" class="w-full sm:w-auto px-6 py-2 border border-gray-300 rounded-md bg-white text-gray-700 font-medium hover:bg-gray-100 transition duration-300">
+                        Reiniciar Juego
+                    </button>
+                    <span id="memoria-moves-counter" class="text-lg font-medium text-gray-600">Movimientos: 0</span>
+                </div>
+                <p id="memoria-message" class="mt-4 text-center text-lg font-bold"></p>
+            </div>
+        </section>
 
-  <footer>
-    <p>&copy; 2025 | Página creada con fines educativos.</p>
-  </footer>
+        <!-- Conclusiones -->
+        <section id="conclusiones" class="p-6 md:p-8">
+            <h2 class="text-2xl md:text-3xl font-light text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">Conclusiones del Estudio</h2>
+            <p class="text-gray-600 text-base md:text-lg">
+                El impacto de las redes sociales en el ámbito universitario es multifacético. Si bien pueden potenciar la colaboración y el acceso a la información, su uso no regulado puede llevar a la procrastinación y afectar el bienestar mental. La clave no está en prohibir su uso, sino en fomentar la alfabetización digital y la autorregulación. Los estudiantes que establecen límites claros y aprovechan las plataformas para fines productivos, encuentran en ellas un valioso aliado en su desarrollo académico y profesional.
+            </p>
+        </section>
 
-  <script>
-    /* ==========================
-       GRÁFICAS CON CHART.JS
-       ========================== */
-    const ctx1 = document.getElementById('chart1').getContext('2d');
-    new Chart(ctx1, {
-      type: 'bar',
-      data: {
-        labels: ['Cuentas en redes', 'No distraen', 'Útiles en lo académico', 'No afectan rendimiento'],
-        datasets: [{
-          label: '% de estudiantes',
-          data: [77, 69, 68, 74],
-          backgroundColor: ['#006699','#0099cc','#33cc99','#ff9933']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false } }
-      }
-    });
+    </main>
 
-    const ctx2 = document.getElementById('chart2').getContext('2d');
-    new Chart(ctx2, {
-      type: 'doughnut',
-      data: {
-        labels: ['Uso responsable', 'Uso excesivo'],
-        datasets: [{
-          data: [74, 26],
-          backgroundColor: ['#33cc99','#ff4d4d']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { position: 'bottom' } }
-      }
-    });
+    <footer class="bg-gray-50 text-gray-600 text-center p-6 mt-6 border-t border-gray-200">
+        <p class="text-sm opacity-80">&copy; 2025 | Análisis creado con fines educativos.</p>
+    </footer>
 
-    /* ==========================
-       QUIZ INTERACTIVO
-       ========================== */
-    const quizData = [
-      {
-        question: "¿Qué porcentaje de estudiantes tenía cuentas en redes sociales?",
-        options: ["50%", "77%", "90%"],
-        answer: "77%"
-      },
-      {
-        question: "¿Las redes sociales siempre afectan negativamente el rendimiento académico?",
-        options: ["Sí, siempre", "No, depende del uso", "Nunca"],
-        answer: "No, depende del uso"
-      },
-      {
-        question: "¿Cuál es un riesgo del uso excesivo?",
-        options: ["Mejorar la concentración", "Trastornos del sueño", "Aumentar motivación"],
-        answer: "Trastornos del sueño"
-      },
-      {
-        question: "¿Qué beneficio puede tener su uso responsable?",
-        options: ["Aprendizaje colaborativo", "Menos tiempo de estudio", "Cansancio"],
-        answer: "Aprendizaje colaborativo"
-      },
-      {
-        question: "¿Qué porcentaje cree que las redes sociales no los distraen?",
-        options: ["69%", "40%", "85%"],
-        answer: "69%"
-      },
-      {
-        question: "¿Cuál es la clave para un uso sano de redes sociales?",
-        options: ["Prohibirlas", "Equilibrio y responsabilidad", "Usarlas sin límite"],
-        answer: "Equilibrio y responsabilidad"
-      }
-    ];
+    <script>
+        // ==========================
+        // GRÁFICAS CON CHART.JS
+        // ==========================
+        const ctx1 = document.getElementById('chart1').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Uso no Académico Diario', 'Afecta Concentración', 'Uso Académico', 'Uso Profesional'],
+                datasets: [{
+                    label: '% de estudiantes',
+                    data: [85, 60, 70, 45],
+                    backgroundColor: ['#3b82f6','#ef4444','#22c55e','#f59e0b']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Uso de Redes Sociales entre Universitarios',
+                        font: { size: 16, weight: 'normal' }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Porcentaje (%)'
+                        },
+                        grid: { color: '#e5e7eb' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
 
-    let currentQuestion = 0;
-    let score = 0;
+        const ctx2 = document.getElementById('chart2').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['Procrastinación', 'Uso Productivo'],
+                datasets: [{
+                    data: [65, 35],
+                    backgroundColor: ['#ef4444','#22c55e']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { 
+                    legend: { position: 'bottom' },
+                    title: {
+                        display: true,
+                        text: 'Uso de Redes: Procrastinación vs. Productividad',
+                        font: { size: 16, weight: 'normal' }
+                    }
+                }
+            }
+        });
 
-    function loadQuestion() {
-      const q = quizData[currentQuestion];
-      document.getElementById("quiz-question").textContent = q.question;
-      const optionsDiv = document.getElementById("quiz-options");
-      optionsDiv.innerHTML = "";
-      q.options.forEach(option => {
-        const btn = document.createElement("button");
-        btn.textContent = option;
-        btn.onclick = () => checkAnswer(option);
-        optionsDiv.appendChild(btn);
-      });
-      document.getElementById("quiz-result").textContent = "";
-    }
+        // ==========================
+        // QUIZ INTERACTIVO
+        // ==========================
+        const quizData = [
+            {
+                question: "¿Qué porcentaje de estudiantes usa redes sociales para fines no académicos a diario?",
+                options: ["70%", "85%", "60%"],
+                answer: "85%"
+            },
+            {
+                question: "¿Cuál es un beneficio clave de las redes sociales para universitarios?",
+                options: ["Más tiempo de ocio", "Procrastinación", "Networking profesional"],
+                answer: "Networking profesional"
+            },
+            {
+                question: "¿Qué riesgo se asocia con el uso excesivo de redes sociales?",
+                options: ["Mejora de la memoria", "Aumento de la concentración", "Ansiedad y estrés"],
+                answer: "Ansiedad y estrés"
+            },
+            {
+                question: "¿Qué porcentaje usa grupos de redes para coordinar trabajos?",
+                options: ["45%", "60%", "70%"],
+                answer: "70%"
+            },
+            {
+                question: "¿La clave para un uso saludable de redes es prohibirlas?",
+                options: ["Sí", "No, es la autorregulación", "Solo en horario de clase"],
+                answer: "No, es la autorregulación"
+            }
+        ];
 
-    function checkAnswer(selected) {
-      const correct = quizData[currentQuestion].answer;
-      const resultDiv = document.getElementById("quiz-result");
-      if (selected === correct) {
-        resultDiv.textContent = "✅ ¡Correcto!";
-        resultDiv.style.color = "green";
-        score++;
-      } else {
-        resultDiv.textContent = "❌ Incorrecto. Respuesta correcta: " + correct;
-        resultDiv.style.color = "red";
-      }
-      currentQuestion++;
-      if (currentQuestion < quizData.length) {
-        setTimeout(loadQuestion, 1500);
-      } else {
-        setTimeout(() => {
-          document.getElementById("quiz-question").textContent = "Juego terminado 🎉";
-          document.getElementById("quiz-options").innerHTML = "";
-          document.getElementById("quiz-result").textContent =
-            `Tu puntaje final es: ${score}/${quizData.length}`;
-          document.getElementById("quiz-result").style.color = "blue";
-        }, 1500);
-      }
-    }
+        let currentQuestion = 0;
+        let score = 0;
 
-    loadQuestion();
-  </script>
+        function loadQuestion() {
+            const q = quizData[currentQuestion];
+            document.getElementById("quiz-question").textContent = q.question;
+            const optionsDiv = document.getElementById("quiz-options");
+            optionsDiv.innerHTML = "";
+            q.options.forEach(option => {
+                const btn = document.createElement("button");
+                btn.textContent = option;
+                btn.classList.add("w-full", "p-3", "rounded-md", "bg-gray-100", "text-gray-700", "font-medium", "hover:bg-gray-200", "transition", "duration-300", "text-left", "border", "border-gray-200");
+                btn.onclick = () => checkAnswer(option);
+                optionsDiv.appendChild(btn);
+            });
+            document.getElementById("quiz-result").textContent = "";
+        }
+
+        function checkAnswer(selected) {
+            const correct = quizData[currentQuestion].answer;
+            const resultDiv = document.getElementById("quiz-result");
+            if (selected === correct) {
+                resultDiv.textContent = "✅ ¡Correcto!";
+                resultDiv.classList.remove("text-red-600");
+                resultDiv.classList.add("text-green-600");
+                score++;
+            } else {
+                resultDiv.textContent = "❌ Incorrecto. La respuesta correcta es: " + correct;
+                resultDiv.classList.remove("text-green-600");
+                resultDiv.classList.add("text-red-600");
+            }
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
+                setTimeout(loadQuestion, 1500);
+            } else {
+                setTimeout(() => {
+                    document.getElementById("quiz-question").textContent = "Juego terminado 🎉";
+                    document.getElementById("quiz-options").innerHTML = "";
+                    document.getElementById("quiz-result").textContent = `Tu puntaje final es: ${score}/${quizData.length}`;
+                    document.getElementById("quiz-result").classList.remove("text-red-600", "text-green-600");
+                    document.getElementById("quiz-result").classList.add("text-gray-800");
+                }, 1500);
+            }
+        }
+
+        loadQuestion();
+
+        // ==========================
+        // JUEGO DE MEMORIA
+        // ==========================
+        const cardSymbols = ['📚', '💻', '📱', '🔔', '💬', '👍', '🎓', '⏰'];
+        const gameCards = [...cardSymbols, ...cardSymbols];
+        
+        const gameBoard = document.getElementById('memoria-game-board');
+        const restartBtn = document.getElementById('memoria-restart-btn');
+        const movesCounter = document.getElementById('memoria-moves-counter');
+        const messageDisplay = document.getElementById('memoria-message');
+
+        let hasFlippedCard = false;
+        let lockBoard = false;
+        let firstCard, secondCard;
+        let matchesFound = 0;
+        let moves = 0;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function createCard(symbol) {
+            const card = document.createElement('div');
+            card.classList.add('memoria-card');
+            card.innerHTML = `
+                <div class="memoria-card-inner">
+                    <div class="memoria-card-face memoria-card-back"></div>
+                    <div class="memoria-card-face memoria-card-front">${symbol}</div>
+                </div>
+            `;
+            card.addEventListener('click', flipCard);
+            return card;
+        }
+
+        function flipCard() {
+            if (lockBoard) return;
+            if (this === firstCard) return;
+
+            this.querySelector('.memoria-card-inner').classList.add('is-flipped');
+
+            if (!hasFlippedCard) {
+                // Primer clic
+                hasFlippedCard = true;
+                firstCard = this;
+                return;
+            }
+
+            // Segundo clic
+            secondCard = this;
+            moves++;
+            movesCounter.textContent = `Movimientos: ${moves}`;
+            checkForMatch();
+        }
+
+        function checkForMatch() {
+            const isMatch = firstCard.querySelector('.memoria-card-front').textContent === secondCard.querySelector('.memoria-card-front').textContent;
+            if (isMatch) {
+                disableCards();
+            } else {
+                unflipCards();
+            }
+        }
+
+        function disableCards() {
+            firstCard.removeEventListener('click', flipCard);
+            secondCard.removeEventListener('click', flipCard);
+            
+            matchesFound++;
+            if (matchesFound === cardSymbols.length) {
+                endGame();
+            }
+
+            resetBoard();
+        }
+
+        function unflipCards() {
+            lockBoard = true;
+            setTimeout(() => {
+                firstCard.querySelector('.memoria-card-inner').classList.remove('is-flipped');
+                secondCard.querySelector('.memoria-card-inner').classList.remove('is-flipped');
+                resetBoard();
+            }, 1000);
+        }
+
+        function resetBoard() {
+            [hasFlippedCard, lockBoard] = [false, false];
+            [firstCard, secondCard] = [null, null];
+        }
+
+        function endGame() {
+            messageDisplay.textContent = `¡Felicidades! Encontraste todas las parejas en ${moves} movimientos.`;
+            messageDisplay.classList.add('text-green-600');
+        }
+
+        function startGame() {
+            gameBoard.innerHTML = '';
+            matchesFound = 0;
+            moves = 0;
+            movesCounter.textContent = `Movimientos: 0`;
+            messageDisplay.textContent = '';
+            messageDisplay.classList.remove('text-green-600');
+            resetBoard();
+
+            const shuffledCards = shuffle(gameCards);
+            shuffledCards.forEach(symbol => {
+                const card = createCard(symbol);
+                gameBoard.appendChild(card);
+            });
+        }
+
+        restartBtn.addEventListener('click', startGame);
+
+        // Iniciar el juego al cargar la página
+        startGame();
+    </script>
 </body>
 </html>
