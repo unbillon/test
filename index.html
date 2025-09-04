@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redes Sociales y Rendimiento Académico</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background: #f4f7fa;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(135deg, #006699, #004466);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    nav {
+      background: #004466;
+      padding: 12px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      padding: 30px;
+      max-width: 950px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #004466;
+      margin-top: 0;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    blockquote {
+      background: #e6f2f8;
+      border-left: 5px solid #004466;
+      padding: 15px;
+      font-style: italic;
+      margin: 20px 0;
+    }
+    footer {
+      background: #002233;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Estilos del quiz */
+    .quiz-container {
+      margin-top: 20px;
+    }
+    .quiz-question {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .quiz-options button {
+      display: block;
+      margin: 5px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #006699;
+      color: white;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+    }
+    .quiz-options button:hover {
+      background: #004466;
+    }
+    .quiz-result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Redes Sociales y Rendimiento Académico</h1>
+    <p>Un análisis sobre cómo el uso digital impacta en la vida de los estudiantes</p>
+  </header>
+
+  <nav>
+    <a href="#resumen">Resumen</a>
+    <a href="#importancia">Importancia</a>
+    <a href="#beneficios">Beneficios</a>
+    <a href="#riesgos">Riesgos</a>
+    <a href="#resultados">Resultados</a>
+    <a href="#quiz">Juego</a>
+    <a href="#conclusiones">Conclusiones</a>
+  </nav>
+
+  <section id="resumen">
+    <h2>Resumen</h2>
+    <p>
+      El estudio analizó la influencia de las redes sociales en estudiantes de educación básica media. 
+      Lejos de ser únicamente un distractor, estas plataformas pueden convertirse en un recurso educativo 
+      cuando se emplean con moderación y responsabilidad.
+    </p>
+  </section>
+
+  <section id="importancia">
+    <h2>Importancia del Tema</h2>
+    <p>
+      En la actualidad, las redes sociales forman parte esencial de la vida de los jóvenes.
+      Influyen en la comunicación, la identidad y el aprendizaje. El reto no es prohibirlas,
+      sino enseñar a usarlas de manera responsable.
+    </p>
+    <blockquote>
+      “El reto de la educación actual no es prohibir las redes sociales, sino guiar a los estudiantes 
+      en su uso consciente y responsable.”
+    </blockquote>
+  </section>
+
+  <section id="beneficios">
+    <h2>Beneficios del Uso de Redes Sociales</h2>
+    <ul>
+      <li>Facilitan la comunicación entre estudiantes y docentes.</li>
+      <li>Favorecen el aprendizaje colaborativo mediante grupos y foros.</li>
+      <li>Acceso rápido a información y recursos digitales.</li>
+      <li>Desarrollan habilidades digitales.</li>
+    </ul>
+  </section>
+
+  <section id="riesgos">
+    <h2>Riesgos del Uso Excesivo</h2>
+    <ul>
+      <li>Pérdida de concentración durante el estudio.</li>
+      <li>Menos tiempo para tareas escolares.</li>
+      <li>Trastornos del sueño.</li>
+      <li>Exposición a ciberbullying o noticias falsas.</li>
+    </ul>
+  </section>
+
+  <section id="resultados">
+    <h2>Resultados del Estudio</h2>
+    <ul>
+      <li>77% de los estudiantes tiene cuentas activas en redes sociales.</li>
+      <li>El 69% cree que no los distraen de sus estudios.</li>
+      <li>El 68% las considera útiles en el ámbito académico.</li>
+      <li>El 74% asegura que no afectan su rendimiento académico.</li>
+    </ul>
+    <canvas id="chart1" height="100"></canvas>
+    <canvas id="chart2" height="100" style="margin-top:20px;"></canvas>
+  </section>
+
+  <!-- Juego interactivo -->
+  <section id="quiz">
+    <h2>🎮 Juego: ¿Cuánto sabes sobre redes sociales y estudios?</h2>
+    <div class="quiz-container">
+      <div id="quiz-question" class="quiz-question"></div>
+      <div id="quiz-options" class="quiz-options"></div>
+      <div id="quiz-result" class="quiz-result"></div>
+    </div>
+  </section>
+
+  <section id="conclusiones">
+    <h2>Conclusiones</h2>
+    <p>
+      El impacto de las redes sociales en el rendimiento académico no depende de la cantidad de tiempo,
+      sino del uso que se les dé. Usadas de forma consciente, pueden ser un aliado para el aprendizaje;
+      usadas en exceso, se convierten en un riesgo. La clave está en el equilibrio.
+    </p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 | Página creada con fines educativos.</p>
+  </footer>
+
+  <script>
+    /* ==========================
+       GRÁFICAS CON CHART.JS
+       ========================== */
+    const ctx1 = document.getElementById('chart1').getContext('2d');
+    new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: ['Cuentas en redes', 'No distraen', 'Útiles en lo académico', 'No afectan rendimiento'],
+        datasets: [{
+          label: '% de estudiantes',
+          data: [77, 69, 68, 74],
+          backgroundColor: ['#006699','#0099cc','#33cc99','#ff9933']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    const ctx2 = document.getElementById('chart2').getContext('2d');
+    new Chart(ctx2, {
+      type: 'doughnut',
+      data: {
+        labels: ['Uso responsable', 'Uso excesivo'],
+        datasets: [{
+          data: [74, 26],
+          backgroundColor: ['#33cc99','#ff4d4d']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' } }
+      }
+    });
+
+    /* ==========================
+       QUIZ INTERACTIVO
+       ========================== */
+    const quizData = [
+      {
+        question: "¿Qué porcentaje de estudiantes tenía cuentas en redes sociales?",
+        options: ["50%", "77%", "90%"],
+        answer: "77%"
+      },
+      {
+        question: "¿Las redes sociales siempre afectan negativamente el rendimiento académico?",
+        options: ["Sí, siempre", "No, depende del uso", "Nunca"],
+        answer: "No, depende del uso"
+      },
+      {
+        question: "¿Cuál es un riesgo del uso excesivo?",
+        options: ["Mejorar la concentración", "Trastornos del sueño", "Aumentar motivación"],
+        answer: "Trastornos del sueño"
+      },
+      {
+        question: "¿Qué beneficio puede tener su uso responsable?",
+        options: ["Aprendizaje colaborativo", "Menos tiempo de estudio", "Cansancio"],
+        answer: "Aprendizaje colaborativo"
+      },
+      {
+        question: "¿Qué porcentaje cree que las redes sociales no los distraen?",
+        options: ["69%", "40%", "85%"],
+        answer: "69%"
+      },
+      {
+        question: "¿Cuál es la clave para un uso sano de redes sociales?",
+        options: ["Prohibirlas", "Equilibrio y responsabilidad", "Usarlas sin límite"],
+        answer: "Equilibrio y responsabilidad"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      const q = quizData[currentQuestion];
+      document.getElementById("quiz-question").textContent = q.question;
+      const optionsDiv = document.getElementById("quiz-options");
+      optionsDiv.innerHTML = "";
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(option);
+        optionsDiv.appendChild(btn);
+      });
+      document.getElementById("quiz-result").textContent = "";
+    }
+
+    function checkAnswer(selected) {
+      const correct = quizData[currentQuestion].answer;
+      const resultDiv = document.getElementById("quiz-result");
+      if (selected === correct) {
+        resultDiv.textContent = "✅ ¡Correcto!";
+        resultDiv.style.color = "green";
+        score++;
+      } else {
+        resultDiv.textContent = "❌ Incorrecto. Respuesta correcta: " + correct;
+        resultDiv.style.color = "red";
+      }
+      currentQuestion++;
+      if (currentQuestion < quizData.length) {
+        setTimeout(loadQuestion, 1500);
+      } else {
+        setTimeout(() => {
+          document.getElementById("quiz-question").textContent = "Juego terminado 🎉";
+          document.getElementById("quiz-options").innerHTML = "";
+          document.getElementById("quiz-result").textContent =
+            `Tu puntaje final es: ${score}/${quizData.length}`;
+          document.getElementById("quiz-result").style.color = "blue";
+        }, 1500);
+      }
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>
